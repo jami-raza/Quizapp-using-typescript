@@ -25,13 +25,18 @@ jobs:
       uses: actions/setup-node@v2-beta
       with:
         version: 12
-    - name: Build React App
-      run: |
-        npm install # Install Dependencies
-        CI=false npm run build # CI=false to ignore warnings
-    # Runs a set of commands using the runners shell
+    - name: GitHub Action for Yarn
+      uses: Borales/actions-yarn@v2.1.0
+      with:
+        # Yarn command
+       cmd: install 
+
+    - name: creating build 
+      run: yarn build
+      
     - name: installing Surge
       run: npm install --global surge
-
+      
     - name: deploying on surge
-      run: surge ./build http://advance-quiz.surge.sh/ --token ${{ secrets.SURGE_TOKEN }}
+      run: surge ./build http://modern-quiz-app.surge.sh/ --token ${{ secrets.SURGE_TOKEN }}
+
