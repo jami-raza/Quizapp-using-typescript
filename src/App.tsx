@@ -19,7 +19,7 @@ function App() {
   let [loading, setLoading] = useState(false);
   let [useranswer, setUserAnswer] = useState<Answer_object[]>([]);
   let [gameOver, setGameOver] = useState(true);
-  let [quizcompleted, setQuizCompleted]=useState(false)
+  //let [quizcompleted, setQuizCompleted]=useState(false)
   
     const Startquiz = async()=>{
         setLoading(true);
