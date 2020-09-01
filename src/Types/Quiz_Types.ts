@@ -17,8 +17,18 @@ export type Quiz_type={
     options:string[]
     correct_answer:string
 }
-export type Quiz_end={
-    score:number
-    
+export type Answer_object={
+    question: string;
+    answer: string;
+    correct: boolean;
+    correctAnswer: string;
+}
+export type quizPropsTypes={
+    question:string
+    options:string[]
+    callback:(e: React.MouseEvent<HTMLButtonElement>) => void;
+    userAnswer: Answer_object | undefined;
+    questionNr: number;
+    totalQuestions: number;
 }
 

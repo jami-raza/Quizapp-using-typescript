@@ -9,7 +9,6 @@ export const Getquizdetail=async(totalques:number,level:string): Promise<Quiz_ty
     const quiz:Quiz_type[]=results.map((questionobj:QuestionType)=>{
         return{
             question:questionobj.question,
-
             correct_answer:questionobj.correct_answer,
             options:shuffelArray([...questionobj.incorrect_answers,questionobj.correct_answer])
             

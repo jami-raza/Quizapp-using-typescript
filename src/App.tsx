@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
+// Components 
 import QuizCard from './Components/QuizCard';
-import {Quiz_type} from './Types/Quiz_Types'
+// Types
+import {Quiz_type,Answer_object} from './Types/Quiz_Types'
+// Api
 import {Getquizdetail} from './Services/Api'
+// Styles
+import {GlobalStyle,Wrapper} from './AppStyles';
+import Footer from './Components/Footer';
 
-
-export type Answer_object={
-    question: string;
-    answer: string;
-    correct: boolean;
-    correctAnswer: string;
-}
 
 const Total_question = 10
 function App() {
@@ -19,7 +18,7 @@ function App() {
   let [loading, setLoading] = useState(false);
   let [useranswer, setUserAnswer] = useState<Answer_object[]>([]);
   let [gameOver, setGameOver] = useState(true);
-  //let [quizcompleted, setQuizCompleted]=useState(false)
+  
   
     const Startquiz = async()=>{
         setLoading(true);
@@ -34,10 +33,12 @@ function App() {
     };
     
  const checkAnswer = (e:any)=>{
+   // Check the correct answer and set score
      if (!gameOver){
     const answer = e.currentTarget.value;
     const correct = quiz[currentStep].correct_answer === answer;
         if (correct) setScore(++score)
+    // Save the answer in array
     const answerObject = {
         question: quiz[currentStep].question,
         answer,
@@ -64,16 +65,17 @@ function App() {
   
   
   return (
-      
-    <div>
-        <h1>React Quiz</h1>
+      <>
+    <GlobalStyle/>
+    <Wrapper>
+        <h1>Quiz Academy</h1>
         {gameOver || useranswer.length === Total_question ? (
           <button className='start' onClick={Startquiz}>
             Start
           </button>
         ) : null}
         
-        {!gameOver ? <p>Score:{score}</p>:null}
+        {!gameOver ? <p className='score'>Score:{score}</p>:null}
         {loading ? <p>Loading Questions...</p>:null}
         
         {!loading && !gameOver && (
@@ -91,7 +93,9 @@ function App() {
             Next Question
           </button>
         ) : null}
-    </div>
+        </Wrapper>
+        <Footer/>
+    </>
   );
 }
 
